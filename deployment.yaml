@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: game-2048
-  name: deployment-2048
+  namespace: flask-env-var
+  name: deployment-flask-env-var
 spec:
   selector:
     matchLabels:
-      app.kubernetes.io/name: app-2048
+      app.kubernetes.io/name: flask-env-var
   replicas: 5
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: app-2048
+        app.kubernetes.io/name: flask-env-var
     spec:
       containers:
-      - image: public.ecr.aws/l6m2t8p7/docker-2048:latest
+      - image: fsainovich/flask-env-var:5
         imagePullPolicy: Always
-        name: app-2048
+        name: flask-env-var
         ports:
-        - containerPort: 80
+        - containerPort: 5000
