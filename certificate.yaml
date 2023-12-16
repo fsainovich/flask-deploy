@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: wildcard-cert
+  namespace: game-2048
+spec:
+  secretName: 2048-cert-tls
+  issuerRef:
+    name: letsencrypt
+    kind: ClusterIssuer
+  commonName: '2048.fsainovich.xyz'
+  dnsNames:
+    - '2048.fsainovich.xyz'
