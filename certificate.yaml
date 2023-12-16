@@ -2,12 +2,12 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: wildcard-cert
-  namespace: game-2048
+  namespace: flask-env-var
 spec:
-  secretName: 2048-cert-tls
+  secretName: flask-env-var-cert-tls
   issuerRef:
     name: letsencrypt
     kind: ClusterIssuer
-  commonName: '2048.fsainovich.xyz'
+  commonName: 'flask.fsainovich.xyz'
   dnsNames:
-    - '2048.fsainovich.xyz'
+    - 'flask.fsainovich.xyz'
