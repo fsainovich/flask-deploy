@@ -1,21 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: flask-env-var
-  name: deployment-flask-env-var
+  labels:
+    app: flask-env-var
+  name: flask-env-var
 spec:
+  replicas: 2
   selector:
     matchLabels:
-      app.kubernetes.io/name: flask-env-var
-  replicas: 5
+      app: flask-env-var  
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: flask-env-var
+        app: flask-env-var
     spec:
       containers:
-      - image: fsainovich/flask-env-var:5
-        imagePullPolicy: Always
+      - image: fsainovich/flask-env-var:0.1
         name: flask-env-var
-        ports:
-        - containerPort: 5000

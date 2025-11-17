@@ -1,13 +1,11 @@
 apiVersion: v1
-kind: Service
+kind: Service 
 metadata:
-  namespace: flask-env-var
-  name: service-flask-env-var
+  name: flask-env-var-service
 spec:
+  selector: 
+    app: flask-env-var
   ports:
-    - port: 80
-      targetPort: 5000
-      protocol: TCP
-  type: ClusterIP
-  selector:
-    app.kubernetes.io/name: flask-env-var
+    - protocol: TCP
+      port: 80 # Porta do Service
+      targetPort: 5000 # Porta dos Pods
