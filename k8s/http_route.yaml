@@ -1,45 +1,17 @@
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
-  name: flask-env-var
+  name: flask-env-var  
   annotations:
-    external-dns.alpha.kubernetes.io/hostname: "gw.home.fsainovich.tec.br"
+    external-dns.alpha.kubernetes.io/hostname: "flask.home.fsainovich.tec.br"
+    external-dns.alpha.kubernetes.io/target: "*.{{ home.fsainovich.tec.br }}"
 spec:
-  hostnames:
-  - flask.home.fsainovich.tec.br
   parentRefs:
-  - name: default-gateway
-    namespace: nginx-gwapi
-    sectionName: wildcard-https
-  rules:
-  - backendRefs:
-    - group: ""
-      kind: Service
-      name: flask-env-var-service
-      port: 80
-      weight: 1
-    matches:
-    - path:
-        type: PathPrefix
-        value: /
-
----
-apiVersion: gateway.networking.k8s.io/v1
-kind: HTTPRoute
-metadata:
-  name: http-filter-redirect-flask
-spec:
+    - name: "default-gateway"
+      namespace: "{{ default_gateway_namespace }}"
   hostnames:
-  - flask.home.fsainovich.tec.br
-  parentRefs:
-  - group: gateway.networking.k8s.io
-    kind: Gateway
-    name: default-gateway
-    namespace: nginx-gwapi
-    sectionName: http  
+    - "flask.home.fsainovich.tec.br"
   rules:
-  - filters:
-    - type: RequestRedirect
-      requestRedirect:
-        scheme: https
-        statusCode: 302
+    - backendRefs:
+      - name: flask-env-var-service
+        port: 80
