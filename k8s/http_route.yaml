@@ -8,7 +8,7 @@ metadata:
 spec:
   parentRefs:
     - name: "default-gateway"
-      namespace: "{{ default_gateway_namespace }}"
+      namespace: "default-gateway"
   hostnames:
     - "flask.home.fsainovich.tec.br"
   rules:
